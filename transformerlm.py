@@ -2,6 +2,8 @@
 from clearml import Task
 
 task = Task.init(project_name='test-hpsearch', task_name='transformers-lm')
+task.set_base_docker("default-base")
+task.execute_remotely(queue_name="hpopt", exit_process=True)
 logger = task.get_logger()
 
 import argparse
@@ -199,7 +201,7 @@ def main(args):
 if __name__ == '__main__':
 
     configuration_dict = {
-    'epochs': 5, 
+    'epochs': 10, 
     'batch_size': 60, 
     'dropout': 0.2, 
     'lr': 20,
@@ -220,7 +222,6 @@ if __name__ == '__main__':
     'tied': True,
     'onnx-export': ''
     }
-
 
     configuration_dict = task.connect(configuration_dict)
     print('Task ID number is: {}'.format(task.id)) 
