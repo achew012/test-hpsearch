@@ -2,7 +2,6 @@
 from clearml import Task
 
 task = Task.init(project_name='test-hpsearch', task_name='transformers-lm')
-task.set_base_docker("default-base")
 task.execute_remotely(queue_name="hpopt", exit_process=True)
 logger = task.get_logger()
 
